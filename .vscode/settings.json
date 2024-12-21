@@ -22,7 +22,7 @@
         "warning"
     ],
     "rust-analyzer.restartServerOnConfigChange": true,
-    "rust-analyzer.imports.prefix": "self",
+    "rust-analyzer.imports.prefix": "plain",
     "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames": true,
     "rust-analyzer.interpret.tests": true,
     "rust-analyzer.lens.references.trait.enable": false,
