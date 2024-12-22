@@ -1,0 +1,12 @@
+lints.workspace = true
+
+[package]
+edition.workspace = true
+license.workspace = true
+name = "lox-compiler"
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+lox-bytecode = { path = "../lox-bytecode" }
+lox-syntax = { path = "../lox-syntax" }

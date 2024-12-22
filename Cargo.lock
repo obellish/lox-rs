@@ -26,6 +26,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "lox-compiler"
+version = "0.1.0"
+dependencies = [
+ "lox-bytecode",
+ "lox-syntax",
+]
+
+[[package]]
 name = "lox-gc"
 version = "0.1.0"
 dependencies = [
