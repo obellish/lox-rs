@@ -11,12 +11,17 @@ version.workspace = true
 
 [workspace]
 members = [
-    "./crates/lox-bytecode",
+    "crates/lox-bytecode",
     "crates/lox-compiler",
     "crates/lox-gc",
     "crates/lox-mmap",
-    "crates/lox-syntax"
+    "crates/lox-syntax",
+    "crates/lox-vm"
 ]
+
+[workspace.dependencies]
+arrayvec = "0.7.2"
+lox-bytecode = { path = "crates/lox-bytecode" }
 
 [workspace.lints.rust]
 elided_lifetimes_in_paths = "warn"
@@ -43,6 +48,7 @@ significant_drop_tightening = "allow"
 similar_names = "allow"
 str_to_string = "deny"
 struct_excessive_bools = "allow"
+style = { level = "warn", priority = -1 }
 todo = "warn"
 try_err = "warn"
 undocumented_unsafe_blocks = "allow"

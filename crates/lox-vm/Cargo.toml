@@ -3,10 +3,11 @@ lints.workspace = true
 [package]
 edition.workspace = true
 license.workspace = true
-name = "lox-compiler"
+name = "lox-vm"
 rust-version.workspace = true
 version.workspace = true
 
 [dependencies]
+arrayvec.workspace = true
 lox-bytecode.workspace = true
-lox-syntax = { path = "../lox-syntax" }
+lox-gc = { path = "../lox-gc" }

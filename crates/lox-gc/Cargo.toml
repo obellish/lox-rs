@@ -8,5 +8,5 @@ rust-version.workspace = true
 version.workspace = true
 
 [dependencies]
-arrayvec = "0.7.2"
+arrayvec.workspace = true
 lox-mmap = { path = "../lox-mmap" }
