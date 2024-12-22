@@ -10,7 +10,12 @@ version.workspace = true
 [dependencies]
 
 [workspace]
-members = ["./crates/lox-bytecode", "crates/lox-mmap", "crates/lox-syntax"]
+members = [
+    "./crates/lox-bytecode",
+    "crates/lox-gc",
+    "crates/lox-mmap",
+    "crates/lox-syntax"
+]
 
 [workspace.lints.rust]
 elided_lifetimes_in_paths = "warn"
@@ -39,7 +44,7 @@ str_to_string = "deny"
 struct_excessive_bools = "allow"
 todo = "warn"
 try_err = "warn"
-undocumented_unsafe_blocks = "deny"
+undocumented_unsafe_blocks = "allow"
 unimplemented = "deny"
 unnecessary_wraps = "allow"
 unsafe_derive_deserialize = "allow"

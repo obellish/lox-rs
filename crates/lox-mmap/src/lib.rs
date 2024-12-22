@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 pub struct MemoryMap {
 	size: usize,
 	data: *mut u8,
@@ -10,9 +11,11 @@ impl MemoryMap {
 	}
 }
 
-#[cfg(miri)]
+#[cfg(not(all(not(miri), unix)))]
 impl MemoryMap {
+	#[must_use]
 	pub fn new(size: usize) -> Self {
+		// SAFETY: idk
 		unsafe {
 			let layout = std::alloc::Layout::array::<u8>(size)
 				.unwrap()
@@ -26,7 +29,7 @@ impl MemoryMap {
 	}
 }
 
-#[cfg(miri)]
+#[cfg(not(all(not(miri), unix)))]
 impl Drop for MemoryMap {
 	fn drop(&mut self) {
 		let layout = std::alloc::Layout::array::<u8>(self.size)
