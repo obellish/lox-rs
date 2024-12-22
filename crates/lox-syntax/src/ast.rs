@@ -93,3 +93,5 @@ pub enum Stmt {
 }
 
 pub type Ast = Vec<WithSpan<Stmt>>;
+
+pub type BorrowedAst<'a> = &'a [WithSpan<Stmt>];

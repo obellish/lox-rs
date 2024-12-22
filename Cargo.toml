@@ -11,7 +11,8 @@ version.workspace = true
 
 [workspace]
 members = [
-    "./crates/lox-bytecode", "crates/lox-compiler",
+    "./crates/lox-bytecode",
+    "crates/lox-compiler",
     "crates/lox-gc",
     "crates/lox-mmap",
     "crates/lox-syntax"
@@ -45,7 +46,7 @@ struct_excessive_bools = "allow"
 todo = "warn"
 try_err = "warn"
 undocumented_unsafe_blocks = "allow"
-unimplemented = "deny"
+unimplemented = "allow"
 unnecessary_wraps = "allow"
 unsafe_derive_deserialize = "allow"
 used_underscore_binding = "allow"

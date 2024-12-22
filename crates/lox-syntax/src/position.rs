@@ -89,6 +89,12 @@ impl<T> WithSpan<T> {
 	}
 }
 
+impl<T> AsRef<T> for WithSpan<T> {
+	fn as_ref(&self) -> &T {
+		&self.value
+	}
+}
+
 #[derive(Debug, Default, Clone, PartialEq, Eq)]
 pub struct Diagnostic {
 	pub span: Span,
