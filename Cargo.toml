@@ -10,18 +10,9 @@ version.workspace = true
 [dependencies]
 
 [workspace]
-members = [
-    "crates/lox-bytecode",
-    "crates/lox-compiler",
-    "crates/lox-gc",
-    "crates/lox-mmap",
-    "crates/lox-syntax",
-    "crates/lox-vm"
-]
+members = []
 
 [workspace.dependencies]
-arrayvec = "0.7.2"
-lox-bytecode = { path = "crates/lox-bytecode" }
 
 [workspace.lints.rust]
 elided_lifetimes_in_paths = "warn"
