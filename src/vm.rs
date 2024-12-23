@@ -8,15 +8,15 @@ use crate::Compiler;
 
 const STACK_MAX: usize = 256;
 
-#[derive(Debug, Clone, Copy)]
-pub struct Vm<'chunk> {
-	chunk: Option<&'chunk Chunk>,
+#[derive(Debug, Clone)]
+pub struct Vm {
+	chunk: Option<Chunk>,
 	ip: usize,
 	stack: [Value; STACK_MAX],
 	stack_top: usize,
 }
 
-impl<'chunk> Vm<'chunk> {
+impl Vm {
 	#[must_use]
 	pub const fn new() -> Self {
 		Self {
@@ -29,7 +29,9 @@ impl<'chunk> Vm<'chunk> {
 
 	pub fn interpret(&mut self, source: String) -> Result<(), VmError> {
 		let mut compiler = Compiler::new(source);
-		compiler.compile()?;
+		let chunk = compiler.compile()?;
+
+		self.chunk.replace(chunk);
 
 		self.run()
 	}
@@ -52,7 +54,7 @@ impl<'chunk> Vm<'chunk> {
 	}
 
 	fn run(&mut self) -> Result<(), VmError> {
-		let Some(chunk) = self.chunk else {
+		let Some(chunk) = self.chunk.take() else {
 			return Err(VmError::NoChunkPresent);
 		};
 
@@ -98,7 +100,7 @@ impl<'chunk> Vm<'chunk> {
 	}
 }
 
-impl Default for Vm<'_> {
+impl Default for Vm {
 	fn default() -> Self {
 		Self::new()
 	}

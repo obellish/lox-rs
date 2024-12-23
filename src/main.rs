@@ -26,7 +26,7 @@ fn main() -> Result<()> {
 	}
 }
 
-fn run_repl(vm: &mut Vm<'_>) -> Result<()> {
+fn run_repl(vm: &mut Vm) -> Result<()> {
 	loop {
 		print!("> ");
 		stdout().flush()?;
@@ -43,7 +43,7 @@ fn run_repl(vm: &mut Vm<'_>) -> Result<()> {
 	Ok(())
 }
 
-fn run_file(path: PathBuf, vm: &mut Vm<'_>) -> Result<()> {
+fn run_file(path: PathBuf, vm: &mut Vm) -> Result<()> {
 	let data = read_to_string(path)?;
 
 	vm.interpret(data)?;

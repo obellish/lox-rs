@@ -6,9 +6,12 @@ use std::{
 };
 
 pub use self::scanner::*;
+use super::Chunk;
 
 pub struct Compiler {
 	scanner: Scanner,
+	previous: Option<Token<'static>>,
+	current: Option<Token<'static>>,
 }
 
 impl Compiler {
@@ -16,10 +19,12 @@ impl Compiler {
 	pub const fn new(text: String) -> Self {
 		Self {
 			scanner: Scanner::new(text),
+			previous: None,
+			current: None,
 		}
 	}
 
-	pub fn compile(&mut self) -> Result<(), CompilerError> {
+	pub fn compile(&mut self) -> Result<Chunk, CompilerError> {
 		let mut line = 0usize;
 		loop {
 			let token = self.scanner.scan_token()?;
@@ -37,6 +42,16 @@ impl Compiler {
 				break;
 			}
 		}
+
+		Ok(Chunk::new())
+	}
+
+	fn advance(&mut self) -> Result<(), CompilerError> {
+		self.previous = self.current.clone();
+
+		let token = self.scanner.scan_token()?.into_static();
+
+		self.current.replace(token);
 
 		Ok(())
 	}

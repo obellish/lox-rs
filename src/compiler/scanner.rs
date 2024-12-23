@@ -143,6 +143,8 @@ impl Scanner {
 			Some('f') if self.current - self.start > 1 => {
 				match self.text.chars().nth(self.start + 1) {
 					Some('a') => self.check_keyword(2, 3, "lse", TokenType::False),
+					Some('o') => self.check_keyword(2, 1, "r", TokenType::For),
+					Some('u') => self.check_keyword(2, 1, "n", TokenType::Fun),
 					_ => TokenType::Identifier,
 				}
 			}
@@ -152,6 +154,13 @@ impl Scanner {
 			Some('p') => self.check_keyword(1, 4, "rint", TokenType::Print),
 			Some('r') => self.check_keyword(1, 5, "eturn", TokenType::Return),
 			Some('s') => self.check_keyword(1, 4, "uper", TokenType::Super),
+			Some('t') if self.current - self.start > 1 => {
+				match self.text.chars().nth(self.start + 1) {
+					Some('h') => self.check_keyword(2, 2, "is", TokenType::This),
+					Some('r') => self.check_keyword(2, 2, "ue", TokenType::True),
+					_ => TokenType::Identifier,
+				}
+			}
 			Some('v') => self.check_keyword(1, 2, "ar", TokenType::Var),
 			Some('w') => self.check_keyword(1, 4, "hile", TokenType::While),
 			_ => TokenType::Identifier,
@@ -259,6 +268,14 @@ impl<'a> Token<'a> {
 	#[must_use]
 	pub const fn line(&self) -> usize {
 		self.line
+	}
+
+	pub fn into_static(self) -> Token<'static> {
+		Token {
+			kind: self.kind,
+			lexeme: Cow::Owned(self.lexeme.into_owned()),
+			line: self.line,
+		}
 	}
 }
 
