@@ -1,8 +1,9 @@
 mod scanner;
 
 use std::{
+	borrow::Cow,
 	error::Error as StdError,
-	fmt::{Display, Formatter, Result as FmtResult, Write},
+	fmt::{Display, Formatter, Result as FmtResult, Write as _},
 };
 
 pub use self::scanner::*;
@@ -12,6 +13,7 @@ pub struct Compiler {
 	scanner: Scanner,
 	previous: Option<Token<'static>>,
 	current: Option<Token<'static>>,
+	compiling_chunk: Chunk,
 }
 
 impl Compiler {
@@ -21,27 +23,12 @@ impl Compiler {
 			scanner: Scanner::new(text),
 			previous: None,
 			current: None,
+			compiling_chunk: Chunk::new(),
 		}
 	}
 
 	pub fn compile(&mut self) -> Result<Chunk, CompilerError> {
-		let mut line = 0usize;
-		loop {
-			let token = self.scanner.scan_token()?;
-
-			if token.line() == line {
-				print!("   | ");
-			} else {
-				print!("{:>4} ", token.line());
-				line = token.line();
-			}
-
-			println!("{:>2} '{}'", token.kind() as u8, token.lexeme());
-
-			if matches!(token.kind(), TokenType::Eof) {
-				break;
-			}
-		}
+		self.advance()?;
 
 		Ok(Chunk::new())
 	}
@@ -61,6 +48,7 @@ impl Compiler {
 pub enum CompilerError {
 	UnexpectedCharacter(char),
 	UnterminatedString,
+	ErrorAt(usize, Option<Cow<'static, str>>),
 }
 
 impl Display for CompilerError {
@@ -72,6 +60,17 @@ impl Display for CompilerError {
 				f.write_char('.')
 			}
 			Self::UnterminatedString => f.write_str("Unterminated string."),
+			Self::ErrorAt(line, token) => {
+				f.write_str("Error at line ")?;
+				Display::fmt(&line, f)?;
+				f.write_str(" at ")?;
+				if let Some(token) = token {
+					f.write_str(token)?;
+				} else {
+					f.write_str("end")?;
+				}
+				f.write_char('.')
+			}
 		}
 	}
 }

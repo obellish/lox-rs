@@ -270,6 +270,7 @@ impl<'a> Token<'a> {
 		self.line
 	}
 
+	#[must_use]
 	pub fn into_static(self) -> Token<'static> {
 		Token {
 			kind: self.kind,
