@@ -27,10 +27,10 @@ impl Compiler {
 		}
 	}
 
-	pub fn compile(&mut self) -> Result<Chunk, CompilerError> {
+	pub fn compile(mut self) -> Result<Chunk, CompilerError> {
 		self.advance()?;
 
-		Ok(Chunk::new())
+		Ok(self.compiling_chunk)
 	}
 
 	fn advance(&mut self) -> Result<(), CompilerError> {
