@@ -1,0 +1,14 @@
+lints.workspace = true
+
+[package]
+edition.workspace = true
+license.workspace = true
+name = "lox-syntax"
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+logos = "0.15.0"
+
+[features]
+debug = ["logos/debug"]
