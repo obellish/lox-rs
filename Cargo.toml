@@ -8,8 +8,6 @@ rust-version.workspace = true
 version.workspace = true
 
 [dependencies]
-anyhow = "1.0.95"
-clap = { version = "4.5.23", features = ["derive"] }
 
 [workspace]
 members = []
@@ -52,7 +50,7 @@ used_underscore_binding = "allow"
 useless_conversion = "allow"
 
 [workspace.package]
-edition = "2021"
+edition = "2024"
 license = "MIT or Apache-2.0"
-rust-version = "1.75"         # Due to returning `impl Trait` in traits.
+rust-version = "1.85"         # Due to returning `impl Trait` in traits.
 version = "0.1.0"
