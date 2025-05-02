@@ -1,0 +1,11 @@
+lints.workspace = true
+
+[package]
+edition.workspace = true
+license.workspace = true
+name = "lox-gc"
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+lox-mmap = { path = "../mmap" }

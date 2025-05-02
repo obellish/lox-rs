@@ -63,9 +63,8 @@ pub enum Token {
 	Class,
 	#[token("else")]
 	Else,
-	#[token("false", |_| false)]
-	#[token("true", |_| true)]
-	Boolean(bool),
+	#[token("false")]
+	False,
 	#[token("fun")]
 	Fun,
 	#[token("for")]
@@ -84,6 +83,8 @@ pub enum Token {
 	Super,
 	#[token("this")]
 	This,
+	#[token("true")]
+	True,
 	#[token("var")]
 	Var,
 	#[token("while")]

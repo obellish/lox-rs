@@ -10,7 +10,7 @@ version.workspace = true
 [dependencies]
 
 [workspace]
-members = [ "crates/bytecode","crates/syntax"]
+members = [ "crates/bytecode", "crates/gc", "crates/mmap","crates/syntax"]
 
 [workspace.dependencies]
 
